@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCuibDusyB_dOg6pWI7R_G5-uQ2Y13gFGY",
+        authDomain: "prueba-c69ce.firebaseapp.com",
+        databaseURL: "https://prueba-c69ce.firebaseio.com",
+        projectId: "prueba-c69ce",
+        storageBucket: "prueba-c69ce.appspot.com",
+        messagingSenderId: "561736894395",
+        appId: "1:561736894395:web:78b62cf58f896674"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
+    
+</head>
+<body>
+    <h4>Registro de usuarios</h4>
+    <input id="email" type="email" placeholder="Ingresa email">
+    <input id="contrasena" type="password" placeholder="Ingresa contraseña">
+    <button onclick="registrar()">Enviar</button>
+
+    <h4>Ingreso de usuarios</h4>
+    <input id="email2" type="email" placeholder="Ingresa email">
+    <input id="contrasena2" type="password" placeholder="Ingresa contraseña">
+    <button onclick="ingreso()">Acceder</button>
+
+    <div id="contenido">
+        
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
