@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h1>Frutas</h1>
+        <h1>Foto: {{ $route.params.id }}</h1>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Cabecera'
+    name: 'Foto'
 }
 </script>
