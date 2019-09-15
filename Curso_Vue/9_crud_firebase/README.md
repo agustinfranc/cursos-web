@@ -1,4 +1,4 @@
-# 8_router
+# 9_crud_firebase
 
 ## Project setup
 ```
@@ -23,11 +23,6 @@ npm run test
 ### Lints and fixes files
 ```
 npm run lint
-```
-
-### Install Firebase
-```
-npm install firebase --save
 ```
 
 ### Customize configuration
