@@ -1,18 +1,26 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1>Lista de Tareas</h1>
+    <ul>
+      <li v-for="item of tareas" :key="item.id">
+        {{item.id}} - {{item.nombre}}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import {mapActions, mapState} from 'vuex'
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
+  name: 'Home',
+  methods: {
+    ...mapActions(['getTareas'])
+  },
+  created() {
+    this.getTareas()
+  },
+  computed: {
+    ...mapState(['tareas'])
+  },
 }
 </script>
