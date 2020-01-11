@@ -2,10 +2,21 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
 // Importo la biblioteca Firebase y la inicializo
 var firebase = require("firebase/app")
+
 require("firebase/auth")
+require("firebase/firestore")
+
 const firebaseConfig = {
   apiKey: "AIzaSyDr_iIWjJBDAfbz89lueSpknm0Dh_VTJiw",
   authDomain: "cli-crud.firebaseapp.com",
@@ -15,7 +26,10 @@ const firebaseConfig = {
   messagingSenderId: "920313949698",
   appId: "1:920313949698:web:ee95a4222c975da4"
 };
-firebase.initializeApp(firebaseConfig)
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+export default firebaseApp.firestore()
 
 Vue.config.productionTip = false
 

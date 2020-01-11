@@ -21,6 +21,18 @@ const routes = [
     path: '/ingreso',
     name: 'ingreso',
     component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/edit/:id',
+    name: 'edit',
+    component: () => import('../views/Edit.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/add',
+    name: 'add',
+    component: () => import('../views/Add.vue'),
+    meta: { requiresAuth: true }
   }
 ]
 
