@@ -4,9 +4,12 @@ import router from './router'
 import store from './store'
 
 import BootstrapVue from 'bootstrap-vue'
-Vue.user(BootstrapVue)
+Vue.use(BootstrapVue)
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.min.css'
+
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 
 Vue.config.productionTip = false
 

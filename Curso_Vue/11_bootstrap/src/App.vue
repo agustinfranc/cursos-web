@@ -14,6 +14,7 @@
             <b-nav-item :to="{ name: 'grid' }">Grid</b-nav-item>
             <b-nav-item :to="{ name: 'cards' }">Cards</b-nav-item>
             <b-nav-item :to="{ name: 'formularios' }">Form</b-nav-item>
+            <b-nav-item :to="{ name: 'validaciones' }">Validaciones</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
 

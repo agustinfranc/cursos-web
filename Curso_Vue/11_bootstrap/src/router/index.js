@@ -32,6 +32,11 @@ const routes = [
     path: '/formularios',
     name: 'formularios',
     component: () => import('../views/Formularios.vue')
+  },
+  {
+    path: '/validaciones',
+    name: 'validaciones',
+    component: () => import('../views/Validaciones.vue')
   }
 ]
 
