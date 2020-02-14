@@ -6,16 +6,20 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Nombre</div>
                 </div>
-                <input type="text" v-model="nombre" class="form-control">
+                <input type="text" v-model="$v.nombre.$model" class="form-control">
             </div>
-            <button type="submit" class="btn btn-info mb-2">Agregar</button>
+            <button type="submit" class="btn btn-info mb-2" :disabled="$v.$invalid || carga">Agregar</button>
         </form>
-        {{nombre}}
+        <small class="text-danger d-block" v-if="!$v.nombre.required">Campo requerido</small>
+        <small class="text-danger d-block" v-if="!$v.nombre.minLength">Minimo 6 caracteres</small>
+        {{$v.nombre}}
     </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
+import {required, minLength} from 'vuelidate/lib/validators'
+
 export default {
     name: 'Add',
     data() {
@@ -26,5 +30,14 @@ export default {
     methods: {
         ...mapActions(['agregarTarea'])
     },
+    validations: {
+        nombre: {
+            required,
+            minLength: minLength(6)
+        }
+    },
+    computed: {
+        ...mapState(['carga'])      // mapeo carga para deshabilitar boton submit una vez presionado
+    }
 }
 </script>

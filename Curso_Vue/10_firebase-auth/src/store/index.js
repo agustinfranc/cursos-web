@@ -12,7 +12,8 @@ export default new Vuex.Store({
     usuario: null,
     error: '',
     tareas: [],
-    tarea: {nombre: '', id: ''}
+    tarea: { nombre: '', id: '' },
+    carga: false
   },
   mutations: {
     setUsuario(state, payload) {    // payload es todo lo que recibo como parametro
@@ -31,6 +32,9 @@ export default new Vuex.Store({
       state.tareas = state.tareas.filter(doc => {
         return doc.id != id
       })
+    },
+    cargarFirebase(state, payload) {
+      state.carga = payload
     }
   },
   actions: {
@@ -44,7 +48,7 @@ export default new Vuex.Store({
           db.collection(res.user.email).add({
             nombre: 'Tarea de ejemplo'
           })
-            .then( () => {
+            .then(() => {
               router.push({ name: 'inicio' })
             })
 
@@ -67,8 +71,8 @@ export default new Vuex.Store({
         })
     },
     detectarUsuario({ commit }, payload) {
-      if(payload != null) {
-        commit('setUsuario', {email: payload.email, uid: payload.uid})
+      if (payload != null) {
+        commit('setUsuario', { email: payload.email, uid: payload.uid })
       }
       else {
         commit('setUsuario', null)
@@ -81,6 +85,7 @@ export default new Vuex.Store({
     },
     // obtengo las tareas de la db de firestore
     getTareas({ commit }) {   // el commit ejecuta una mutacion
+      commit('cargarFirebase', true)
       const usuario = firebase.auth().currentUser
       const tareas = []
       db.collection(usuario.email).get()
@@ -92,6 +97,7 @@ export default new Vuex.Store({
             tarea.id = doc.id
             tareas.push(tarea)
           })
+          commit('cargarFirebase', false)
         })
 
       commit('setTareas', tareas)   // mando a mutacion
@@ -117,6 +123,7 @@ export default new Vuex.Store({
         })
     },
     agregarTarea({ commit }, nombre) {
+      commit('cargarFirebase', true)
       const usuario = firebase.auth().currentUser
       db.collection(usuario.email).add({
         nombre: nombre
@@ -124,12 +131,13 @@ export default new Vuex.Store({
         .then(doc => {
           console.log(doc.id)
           router.push({ name: 'home' })
+          commit('cargarFirebase', false)
         })
     },
-    eliminarTarea({commit, dispatch}, id) {   // dispatch sirve para llamar a otra accion
+    eliminarTarea({ commit, dispatch }, id) {   // dispatch sirve para llamar a otra accion
       const usuario = firebase.auth().currentUser
       db.collection(usuario.email).doc(id).delete()
-        .then( () => {
+        .then(() => {
           console.log(`Tarea con id: ${id} ha sido eliminada`)
           // dispatch('getTareas') no es recomendable
           commit('eliminarTarea', id)   // llamo a mutacion
@@ -138,7 +146,7 @@ export default new Vuex.Store({
   },
   getters: {    // utilizar una propiedad del state y obtener una respuesta
     existeUsuario(state) {
-      if(state.usuario === null || state.usuario === undefined) {
+      if (state.usuario === null || state.usuario === undefined) {
         return false
       }
       return true
