@@ -5,12 +5,14 @@
       <button class="btn btn-success">Nueva Tarea</button>
     </router-link>
 
+    <input type="text" placeholder="Buscar..." class="form-control mt-5" v-model="texto" v-on:keyup="buscadorTareas(texto)">
+
     <div v-if="carga" class="text-center mt-5">
       <h3>cargando...</h3>
     </div>
 
     <ul class="list-group mt-3">
-      <li v-for="item of tareas" :key="item.id" class="list-group-item">
+      <li v-for="item of tareasFiltrado" :key="item.id" class="list-group-item">
         {{item.id}} - {{item.nombre}}
         <div class="float-right">
           <router-link :to="{name: 'edit', params:{ id: item.id }}">
@@ -26,15 +28,21 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Inicio",
+  data() {
+    return {
+      texto: '',
+    }
+  },
   computed: {
-    ...mapState(["usuario", "tareas", "carga"])
+    ...mapState(["usuario", "tareas", "carga"]),
+    ...mapGetters(["tareasFiltrado"])
   },
   methods: {
-    ...mapActions(["getTareas", "eliminarTarea"])
+    ...mapActions(["getTareas", "eliminarTarea","buscadorTareas"])
   },
   created() {
     this.getTareas();

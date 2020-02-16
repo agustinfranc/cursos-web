@@ -13,8 +13,9 @@
             <button type="submit" class="btn btn-primary" :disabled="$v.$invalid">Acceder</button>
         </form>
         <small class="text-danger d-block"></small>
-        <p>{{ error }}</p>
-        <p>{{ $v }}</p>
+        <p v-if="error === 'auth/user-not-found'">Usuario incorrecto</p>
+        <p v-if="error === 'auth/wrong-password'">Contraseña incorrecta</p>
+        <!-- <p>{{ $v }}</p> -->
     </div>
 </template>
 
