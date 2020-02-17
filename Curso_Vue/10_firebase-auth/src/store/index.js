@@ -13,7 +13,8 @@ export default new Vuex.Store({
     error: '',
     tareas: [],
     tarea: { nombre: '', id: '' },
-    carga: false
+    carga: false,
+    texto: '',
   },
   mutations: {
     setUsuario(state, payload) {    // payload es todo lo que recibo como parametro
@@ -55,7 +56,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
-          commit('setError', err.message)
+          commit('setError', err.code)
         })
     },
     ingresarUsuario({ commit }, payload) {
@@ -67,7 +68,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
-          commit('setError', err.message)
+          commit('setError', err.code)
         })
     },
     detectarUsuario({ commit }, payload) {
@@ -82,6 +83,10 @@ export default new Vuex.Store({
       firebase.auth().signOut()
       commit('setUsuario', null)    // reinicio usuario
       router.push({ name: 'ingreso' })
+    },
+    buscadorTareas({commit, state}, payload) {
+      console.log(payload)
+      state.texto = payload.toLowerCase()
     },
     // obtengo las tareas de la db de firestore
     getTareas({ commit }) {   // el commit ejecuta una mutacion
@@ -150,6 +155,16 @@ export default new Vuex.Store({
         return false
       }
       return true
+    },
+    tareasFiltrado(state) {
+      let arrayTareasFiltrado = []
+      for (let tarea of state.tareas) {
+        let nombre = tarea.nombre.toLowerCase()
+        if (nombre.indexOf(state.texto) >= 0) {   // si coincide alguna letra
+          arrayTareasFiltrado.push(tarea)
+        }
+      }
+      return arrayTareasFiltrado
     }
   }
 })
