@@ -1,46 +1,32 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <v-card class="overflow-hidden">
+      <v-app-bar absolute color="white" elevate-on-scroll scroll-target="#scrolling-techniques-7">
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+        <v-toolbar-title>Title</v-toolbar-title>
 
-    </v-app-bar>
+        <v-spacer></v-spacer>
 
-    <v-content>
-
-      <router-view/>
-
-    </v-content>
+        <v-btn icon>
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+      </v-app-bar>
+      <v-sheet id="scrolling-techniques-7" class="overflow-y-auto" max-height="600">
+        <v-container style="height: 1500px; padding-top: 56px;">
+          <router-view />
+        </v-container>
+      </v-sheet>
+    </v-card>
   </v-app>
 </template>
 
 <script>
 export default {
-  name: 'App',
+  name: "App",
 
   data: () => ({
     //
-  }),
+  })
 };
 </script>
