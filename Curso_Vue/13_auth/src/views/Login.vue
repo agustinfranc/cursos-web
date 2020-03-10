@@ -36,7 +36,10 @@
 </template>
 
 <script>
-import { firebase } from "@/firebase";
+import { firebase, db } from "@/firebase"
+import { mapMutations } from 'vuex'
+import router from '@/router'
+
 export default {
   name: "Login",
   data() {
@@ -45,8 +48,15 @@ export default {
     };
   },
   methods: {
-    async google() {
-      const provider = new firebase.auth.GoogleAuthProvider();
+    ...mapMutations(['nuevoUsuario']),
+    google() {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      this.ingresar(provider)
+    },
+    facebook() {
+
+    },
+    async ingresar(provider) {
       firebase.auth().languageCode = "es";
       try {
         const result = await firebase.auth().signInWithPopup(provider);
@@ -55,6 +65,22 @@ export default {
         console.log(user)
         // This gives you a Google Access Token. You can use it to access the Google API.
         //var token = result.credential.accessToken;
+
+        const usuario = {
+          nombre: user.displayName,
+          email: user.email,
+          foto: user.photoURL,
+        }
+
+        this.nuevoUsuario(usuario)
+
+        await db.collection('usuarios').doc(user.uid).set(usuario)
+
+        console.log("Usuario guardado en db")
+
+        router.push({name: 'Home'})
+
+
       } catch (error) {
         // Handle Errors here.
         console.log(error)
@@ -66,8 +92,8 @@ export default {
         var credential = error.credential; */
         // ...
       }
-    },
-    facebook() {}
+
+    }
   }
 };
 </script>
