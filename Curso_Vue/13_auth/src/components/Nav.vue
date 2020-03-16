@@ -59,7 +59,7 @@ export default {
         to: {name: "Home"},
       },
       {
-        title: "Contact",
+        title: "Login",
         icon: "mdi-contact-mail",
         to: {name: "Login"},
       },

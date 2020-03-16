@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
 
-    <Nav></Nav>
+    <Nav v-if="usuario"></Nav>
 
     <v-content>
       <v-container>
@@ -18,6 +18,7 @@
 <script>
 //import Appbar from "@/components/Appbar"
 import Nav from "@/components/Nav"
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -29,5 +30,8 @@ export default {
   data: () => ({
     //
   }),
+  computed: {
+    ...mapState(['usuario'])
+  }
 };
 </script>
