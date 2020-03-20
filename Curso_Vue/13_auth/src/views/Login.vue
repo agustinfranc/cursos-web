@@ -63,7 +63,7 @@ export default {
         const result = await firebase.auth().signInWithPopup(provider);
         // The signed-in user info.
         const user = result.user;
-        console.log(user)
+        //console.log(user)
         // This gives you a Google Access Token. You can use it to access the Google API.
         //var token = result.credential.accessToken;
 
@@ -73,7 +73,7 @@ export default {
 
       } catch (error) {
         // Handle Errors here.
-        console.log(error)
+        //console.log(error)
         /* var errorCode = error.code;
         var errorMessage = error.message;
         // The email of the user's account used.

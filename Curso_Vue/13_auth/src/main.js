@@ -8,11 +8,14 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import { auth } from '@/firebase'
 
+import VueChatScroll from 'vue-chat-scroll'
+Vue.use(VueChatScroll)
+
 Vue.config.productionTip = false
 
 auth.onAuthStateChanged( (user) => {
   if (user) {
-    console.log("User is signed")
+    //console.log("User is signed")
 
     store.dispatch('setUsuario', user)
   }

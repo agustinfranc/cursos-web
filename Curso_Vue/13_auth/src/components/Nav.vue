@@ -39,7 +39,7 @@
     <v-app-bar app color="indigo" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>
-        <router-link :to="{name: 'Home'}">Home</router-link>
+        <router-link :to="{name: 'Home'}" class="white--text">Home</router-link>
       </v-toolbar-title>
     </v-app-bar>
   </nav>
@@ -59,14 +59,14 @@ export default {
         to: {name: "Home"},
       },
       {
-        title: "Login",
-        icon: "mdi-contact-mail",
-        to: {name: "Login"},
-      },
-      {
         title: "Admin",
         icon: "mdi-contact-mail",
         to: {name: "Admin"},
+      },
+      {
+        title: "Chat",
+        icon: "mdi-contact-mail",
+        to: {name: "Chat"},
       },
     ]
   }),
@@ -78,3 +78,9 @@ export default {
   }
 };
 </script>
+
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>

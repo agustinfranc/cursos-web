@@ -43,19 +43,23 @@ export default new Vuex.Store({
 
           await db.collection('usuarios').doc(payload.uid).set(usuario)
 
-          console.log("Usuario guardado en db")  
+          //console.log("Usuario guardado en db")  
     
           commit('nuevoUsuario', usuario)
         }
       } catch (error) {
-        console.log(error)
+        //console.log(error)
       }
 
     },
     cerrarSesion({commit}) {
-      auth.signOut()
-      commit('nuevoUsuario', null)
-      router.push({name: 'Login'})
+      auth.signOut().then(function() {
+        // Sign-out successful.
+        commit('nuevoUsuario', null)
+        router.push({name: 'Login'})
+      }).catch(function(error) {
+        // An error happened.
+      });
     }
   },
   modules: {
