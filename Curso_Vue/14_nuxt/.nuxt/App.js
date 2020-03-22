@@ -7,6 +7,7 @@ import {
   globalHandleError
 } from './utils'
 
+import NuxtError from '..\\layouts\\error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
@@ -14,13 +15,27 @@ import '..\\node_modules\\bootstrap\\dist\\css\\bootstrap.css'
 
 import '..\\node_modules\\bootstrap-vue\\dist\\bootstrap-vue.css'
 
+import '..\\assets\\css\\main.css'
+
+import _7705a157 from '..\\layouts\\about.vue'
 import _6f6c098b from '..\\layouts\\default.vue'
 
-const layouts = { "_default": _6f6c098b }
+const layouts = { "_about": _7705a157,"_default": _6f6c098b }
 
 export default {
   render (h, props) {
     const loadingEl = h('NuxtLoading', { ref: 'loading' })
+
+    if (this.nuxt.err && NuxtError) {
+      const errorLayout = (NuxtError.options || NuxtError).layout
+      if (errorLayout) {
+        this.setLayout(
+          typeof errorLayout === 'function'
+            ? errorLayout.call(NuxtError, this.context)
+            : errorLayout
+        )
+      }
+    }
 
     const layoutEl = h(this.layout || 'nuxt')
     const templateEl = h('div', {
