@@ -5,6 +5,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _60817d96 = () => interopDefault(import('..\\pages\\about.vue' /* webpackChunkName: "pages_about" */))
 const _0570a8d0 = () => interopDefault(import('..\\pages\\blog\\index.vue' /* webpackChunkName: "pages_blog_index" */))
+const _24e5c988 = () => interopDefault(import('..\\pages\\vuex\\index.vue' /* webpackChunkName: "pages_vuex_index" */))
 const _3d7bb400 = () => interopDefault(import('..\\pages\\blog\\_id.vue' /* webpackChunkName: "pages_blog__id" */))
 const _2111c80c = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
 
@@ -32,6 +33,10 @@ export const routerOptions = {
     path: "/blog",
     component: _0570a8d0,
     name: "blog"
+  }, {
+    path: "/vuex",
+    component: _24e5c988,
+    name: "vuex"
   }, {
     path: "/blog/:id",
     component: _3d7bb400,
