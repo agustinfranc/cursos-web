@@ -7,6 +7,9 @@ export const state = () => ({
 export const mutations = {
   setTareas(state, payload) {
     state.tareas = payload
+  },
+  setTarea(state, payload) {
+    state.tareas.push(payload)
   }
 };
 
@@ -25,5 +28,16 @@ export const actions = {
     .catch(error => {
       console.log("Error", error)
     })
-  }
+  },
+  async agregarTarea({commit}, payload) {
+    try {
+      const doc = await db.collection('tareas').add({
+        nombre: payload,
+        fecha: new Date()
+      })
+      commit('setTarea', {nombre: payload, id: doc.id})
+    } catch (error) {
+      console.log(error)
+    }
+  },
 };

@@ -1,7 +1,10 @@
 <template>
   <b-container>
     <h2>Vuex</h2>
-    <form></form>
+    <form @submit.prevent="agregarTarea()">
+      <input type="text" class="form-control mb-2" v-model="tarea">
+      <b-button type="submit">Agregar</b-button>
+    </form>
     <ul>
       <li v-for="(item, index) in tareas" :key="index">
         {{item.id}} - {{item.nombre}}
@@ -17,8 +20,14 @@
 import { mapState } from "vuex";
 
 export default {
+  data:() => ({
+    tarea: '',
+  }),
   computed: {
     ...mapState(["tareas"])
+  },
+  methods: {
+    ...mapActions(['agregarTarea'])
   },
 };
 </script>
